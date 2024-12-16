@@ -1,11 +1,59 @@
-import { ScrollView, StyleSheet, Text, View,TextInput } from 'react-native'
-import React, { useState } from 'react'
+import { ScrollView, StyleSheet, Text, View,TextInput,TouchableOpacity,Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
 
 const App = () => {
   const [player1Name,setPlayer1Name] = useState('')
   const [player2Name,setPlayer2Name] = useState('')
   const [player1Points,setPlayer1Points] = useState(0)
   const [player2Points,setPlayer2Points] = useState(0)
+  const [player1SetPoints,setPlayer1SetPoints] = useState(0)
+  const [player2SetPoints,setPlayer2SetPoints] = useState(0)
+  const [turnTextBox, setTurnTextBox] = useState(`${player1Name}' serve`)
+  useEffect(() => {
+    setTurnTextBox(`${player1Name}'s serve`);
+  }, [player1Name]);
+  
+
+
+  const playerTurn = (player1:string, player2:string, play1Points:number, play2Points:number)=>{
+    if((play1Points + play2Points) % 2 === 0){
+      setTurnTextBox(`${player1}'s serve`)
+    }else{
+    setTurnTextBox(`${player2}'s serve`)
+    }
+  }
+
+  const showAlertAtEleven = (playerName:string) => {
+    Alert.alert('Set completed.', `${playerName} has won the set!`, [
+      { text: 'OK', onPress: () => console.log('Alert closed') },
+    ]);
+  };
+
+  const onPlayer1 = () => {
+    setPlayer1Points((prevCount) => {
+      playerTurn(player1Name,player2Name,player1Points+1,player2Points);
+      if (prevCount >= 10) {
+        showAlertAtEleven(player1Name); 
+        setPlayer1SetPoints(count => count + 1);
+        return 0; 
+      }
+      return prevCount + 1; 
+    });
+  };
+  const onPlayer2 = () => {
+    setPlayer2Points((prevCount) => {
+      playerTurn(player1Name,player2Name,player1Points,player2Points+1);
+      if (prevCount >= 10) {
+        showAlertAtEleven(player2Name); 
+        setPlayer2SetPoints(count => count + 1);
+        return 0; 
+      }
+      return prevCount + 1; 
+    });
+  };
+  const player1Dec = ()=>setPlayer1Points((count) => (count > 0 ? count - 1 : 0));
+  const player2Dec = ()=>setPlayer2Points((count) => (count > 0 ? count - 1 : 0));
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.navbar}>
@@ -17,10 +65,12 @@ const App = () => {
                 <TextInput style={styles.name} placeholder='player 1'value={player1Name} onChangeText={(text)=>setPlayer1Name(text)}/>
               </View>
               <View style={styles.pointContainer}>
-                <Text style={styles.points}>0</Text>
-                <View style={styles.setPoints}>
-                  <Text style={styles.setPointsText}>2</Text>
-                </View>
+                <TouchableOpacity onPress={onPlayer1}>
+                  <Text style={styles.points} >{player1Points}</Text>
+                </TouchableOpacity>
+                  <View style={styles.setPoints}>
+                    <Text style={styles.setPointsText}>{player1SetPoints}</Text>
+                  </View>
               </View>
             </View>
 
@@ -29,22 +79,28 @@ const App = () => {
                 <TextInput style={styles.name} placeholder='player 2'value={player2Name} onChangeText={(text)=>setPlayer2Name(text)}/>
               </View>
               <View style={styles.pointContainer}>
-                <Text style={styles.points}>0</Text>
+                <TouchableOpacity onPress={onPlayer2}>
+                <Text style={styles.points}>{player2Points}</Text>
+                </TouchableOpacity>
                 <View style={styles.setPointsTwo}>
-                  <Text style={styles.setPointsText}>2</Text>
+                  <Text style={styles.setPointsText}>{player2SetPoints}</Text>
                 </View>
               </View>
             </View>
       </View>
       <View style={styles.ControlComm}>
           <View style={styles.decrementContainer}>
+            <TouchableOpacity onPress={player1Dec}>
             <Text style={styles.decrement}>-</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.turn}>
-            <Text style={styles.turnText}>player</Text>
+            <Text style={styles.turnText}>{turnTextBox}</Text>
           </View>
           <View style={styles.decrementContainer}>
+          <TouchableOpacity onPress={player2Dec}>
             <Text style={styles.decrement}>-</Text>
+            </TouchableOpacity>
           </View>
       </View>
       <View style={styles.featureContainer}>
@@ -167,7 +223,7 @@ const styles = StyleSheet.create({
     borderRadius:10,
   },
   turnText:{
-    fontSize:25,
+    fontSize:18,
     padding:5,
   },
   decrement:{
