@@ -1,14 +1,18 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Demo
-Default screen
-<img src="/3.png" alt="Initial State" width="500"/>
 
-Points screen
-<img src="/2.png" alt="Initial State" width="500"/>
+## Default screen
 
-Alert screen
-<img src="/1.png" alt="Initial State" width="500"/>
+<img src="/3.png" alt="Initial State" width="250"/>
+
+## Points screen
+
+<img src="/2.png" alt="Initial State" width="250"/>
+
+## Alert screen
+
+<img src="/1.png" alt="Initial State" width="250"/>
 
 
 # Getting Started
