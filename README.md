@@ -1,5 +1,16 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# Demo
+Default screen
+<img src="/3.png" alt="Initial State" width="500"/>
+
+Points screen
+<img src="/2.png" alt="Initial State" width="500"/>
+
+Alert screen
+<img src="/1.png" alt="Initial State" width="500"/>
+
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
