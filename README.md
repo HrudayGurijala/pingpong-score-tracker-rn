@@ -2,17 +2,17 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # Demo
 
-## Default screen
+### Default screen
 
 <img src="/3.png" alt="Initial State" width="250"/>
 
-## Points screen
-
-<img src="/2.png" alt="Initial State" width="250"/>
-
-## Alert screen
+### Points screen
 
 <img src="/1.png" alt="Initial State" width="250"/>
+
+### Alert screen
+
+<img src="/2.png" alt="Initial State" width="250"/>
 
 
 # Getting Started
